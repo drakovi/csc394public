@@ -3,7 +3,7 @@
 # User Features 
 Users can sign up, login/out, and reset their passwords. 
 
-Users can search for laws using either a specific law code or keywords. 
+Users can search for laws using either a specific law code or keywords, with a response coming from OpenAI. 
 
 Users will be able to view law details, including full text, relevant articles, and case information. 
 
