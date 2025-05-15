@@ -10,6 +10,8 @@ Users will be able to view law details, including full text, relevant articles, 
 Users can cite laws in multiple formats directly from the search results page via a pop-up citation tool. 
 
 Users can access the legal document directly via a provided hyperlink with the citation.
+
+Users can view their previous searches, as a history feature. 
  
 # Admin Features  
 Admin Dashboard: Secure login allows admins to manage the platform.
