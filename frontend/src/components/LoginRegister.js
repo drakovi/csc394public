@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './LoginRegister.css';
 
 const LoginRegister = ({ setUser, logoutMessage, setLogoutMessage }) => {
   const [formType, setFormType] = useState('login');
@@ -32,13 +33,12 @@ const LoginRegister = ({ setUser, logoutMessage, setLogoutMessage }) => {
   };
 
   return (
-    <div className="p-4 border rounded max-w-md mx-auto mt-10 shadow">
-      <h2 className="text-xl font-bold mb-4">{formType === 'login' ? 'Login' : 'Register'}</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="login-card">
+      <h2>{formType === 'login' ? 'Login' : 'Register'}</h2>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Username"
-          className="w-full p-2 border rounded"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
@@ -46,22 +46,27 @@ const LoginRegister = ({ setUser, logoutMessage, setLogoutMessage }) => {
         <input
           type="password"
           placeholder="Password"
-          className="w-full p-2 border rounded"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+        <button type="submit">
           {formType === 'login' ? 'Log In' : 'Register'}
         </button>
       </form>
-      <p className="mt-3 text-sm text-center">
+      <p>
         {formType === 'login' ? 'Need an account?' : 'Already have an account?'}{' '}
-        <button onClick={() => setFormType(formType === 'login' ? 'register' : 'login')} className="text-blue-500 underline">
+        <button
+          type="button"
+          className="switch-link"
+          onClick={() => setFormType(formType === 'login' ? 'register' : 'login')}
+        >
           {formType === 'login' ? 'Register here' : 'Login here'}
         </button>
       </p>
-      {message && <p className="mt-2 text-green-600 text-center">{message}</p>}
+      {message && (
+        <p className={`message${message === 'Error occurred' ? ' error' : ''}`}>{message}</p>
+      )}
     </div>
   );
 };
