@@ -1,0 +1,126 @@
+.admin-dashboard-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  padding: 2.5rem 2rem;
+  max-width: 800px;
+  width: 100%;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.admin-dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.admin-dashboard-header h2 {
+  color: #2563eb;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.admin-dashboard-logout {
+  background: linear-gradient(90deg, #dc2626 0%, #f87171 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.admin-dashboard-logout:hover {
+  background: linear-gradient(90deg, #b91c1c 0%, #ef4444 100%);
+}
+
+.admin-section {
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.07);
+}
+
+.admin-section h3 {
+  color: #2563eb;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.admin-section input,
+.admin-section textarea,
+.admin-section select {
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0.75rem;
+  width: 100%;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  background: #fff;
+  transition: border 0.2s;
+}
+
+.admin-section input:focus,
+.admin-section textarea:focus,
+.admin-section select:focus {
+  border: 1.5px solid #2563eb;
+  outline: none;
+}
+
+.admin-section button {
+  background: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  margin-top: 0.5rem;
+}
+
+.admin-section button:hover {
+  background: linear-gradient(90deg, #1e40af 0%, #0ea5e9 100%);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.law-list {
+  margin-top: 1rem;
+}
+
+.law-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.07);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.law-card h4 {
+  color: #2563eb;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.law-card a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.law-card a:hover {
+  color: #0ea5e9;
+}
+
+.law-card .italic {
+  color: #64748b;
+}
