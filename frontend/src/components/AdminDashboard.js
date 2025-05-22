@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './AdminDashboard.css';
 
 function AdminDashboard({ user, setUser, setLogoutMessage }) {
   const [deleteUsername, setDeleteUsername] = useState('');
@@ -68,103 +67,60 @@ function AdminDashboard({ user, setUser, setLogoutMessage }) {
   }, [fetchLaws]);
 
   return (
-    <div className="admin-dashboard-container">
-      <div className="admin-dashboard-header">
-        <h2>Admin Dashboard</h2>
-        <button onClick={handleLogout} className="admin-dashboard-logout">
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold">Admin Dashboard</h2>
+        <button onClick={handleLogout} className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
           Logout
         </button>
       </div>
 
-      <div className="admin-section">
-        <h3>Delete User</h3>
-        <input
-          type="text"
-          value={deleteUsername}
-          onChange={(e) => setDeleteUsername(e.target.value)}
-          placeholder="Enter username"
-        />
-        <button onClick={handleDeleteUser}>Delete User</button>
+      <div className="mb-6">
+        <h3 className="text-xl mb-2">Delete User</h3>
+        <input type="text" value={deleteUsername} onChange={(e) => setDeleteUsername(e.target.value)} placeholder="Enter username" className="border p-2 mr-2" />
+        <button onClick={handleDeleteUser} className="bg-red-500 text-white px-4 py-2 rounded">Delete User</button>
       </div>
 
-      <div className="admin-section">
-        <h3>Add New Law</h3>
-        <input
-          type="text"
-          placeholder="Title"
-          value={newLaw.title}
-          onChange={(e) => setNewLaw({ ...newLaw, title: e.target.value })}
-        />
-        <textarea
-          placeholder="Description"
-          value={newLaw.description}
-          onChange={(e) => setNewLaw({ ...newLaw, description: e.target.value })}
-        ></textarea>
-        <textarea
-          placeholder="Citation"
-          value={newLaw.citation}
-          onChange={(e) => setNewLaw({ ...newLaw, citation: e.target.value })}
-        ></textarea>
-        <input
-          type="text"
-          placeholder="URL"
-          value={newLaw.url}
-          onChange={(e) => setNewLaw({ ...newLaw, url: e.target.value })}
-        />
-        <select
-          value={newLaw.category}
-          onChange={(e) => setNewLaw({ ...newLaw, category: e.target.value })}
-        >
+      <div className="mb-6">
+        <h3 className="text-xl mb-2">Add New Law</h3>
+        <input type="text" placeholder="Title" value={newLaw.title} onChange={(e) => setNewLaw({ ...newLaw, title: e.target.value })} className="border p-2 block mb-2" />
+        <textarea placeholder="Description" value={newLaw.description} onChange={(e) => setNewLaw({ ...newLaw, description: e.target.value })} className="border p-2 block mb-2"></textarea>
+        <textarea placeholder="Citation" value={newLaw.citation} onChange={(e) => setNewLaw({ ...newLaw, citation: e.target.value })} className="border p-2 block mb-2"></textarea>
+        <input type="text" placeholder="URL" value={newLaw.url} onChange={(e) => setNewLaw({ ...newLaw, url: e.target.value })} className="border p-2 block mb-2" />
+        <select value={newLaw.category} onChange={(e) => setNewLaw({ ...newLaw, category: e.target.value })} className="border p-2 block mb-2">
           <option value="">Select Category</option>
           <option value="Compliance">Compliance</option>
           <option value="Data Privacy">Data Privacy</option>
           <option value="Cybercrime Consequences">Cybercrime Consequences</option>
         </select>
-        <button onClick={handleAddLaw}>Add Law</button>
+        <button onClick={handleAddLaw} className="bg-green-500 text-white px-4 py-2 rounded">Add Law</button>
       </div>
 
-      <div className="admin-section">
-        <h3>Delete Law</h3>
-        <input
-          type="text"
-          placeholder="Full Title"
-          value={deleteLawTitle}
-          onChange={(e) => setDeleteLawTitle(e.target.value)}
-        />
-        <button onClick={handleDeleteLaw}>Delete Law</button>
+      <div className="mb-6">
+        <h3 className="text-xl mb-2">Delete Law</h3>
+        <input type="text" placeholder="Full Title" value={deleteLawTitle} onChange={(e) => setDeleteLawTitle(e.target.value)} className="border p-2 mr-2" />
+        <button onClick={handleDeleteLaw} className="bg-red-500 text-white px-4 py-2 rounded">Delete Law</button>
       </div>
 
-      <div className="admin-section">
-        <h3>Search Laws</h3>
-        <input
-          type="text"
-          placeholder="Search..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <select
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        >
+      <div>
+        <h3 className="text-xl mb-2">Search Laws</h3>
+        <input type="text" placeholder="Search..." value={query} onChange={(e) => setQuery(e.target.value)} className="border p-2 mr-2" />
+        <select value={filter} onChange={(e) => setFilter(e.target.value)} className="border p-2">
           <option value="">All Categories</option>
           <option value="Compliance">Compliance</option>
           <option value="Data Privacy">Data Privacy</option>
           <option value="Cybercrime Consequences">Cybercrime Consequences</option>
         </select>
-        <div className="law-list">
+        <div className="mt-4">
           {laws.length === 0 ? (
             <p>No laws found.</p>
           ) : (
             laws.map((law) => (
-              <div key={law.id} className="law-card">
-                <h4>{law.title}</h4>
+              <div key={law.id} className="border p-4 mb-2 rounded">
+                <h4 className="font-bold">{law.title}</h4>
                 <p>{law.description}</p>
-                <p>
-                  <a href={law.url} target="_blank" rel="noopener noreferrer">
-                    {law.url}
-                  </a>
-                </p>
-                <p className="italic">{law.citation}</p>
+                <p><a href={law.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">{law.url}</a></p>
+                <p className="italic text-sm">{law.citation}</p>
               </div>
             ))
           )}
@@ -175,3 +131,4 @@ function AdminDashboard({ user, setUser, setLogoutMessage }) {
 }
 
 export default AdminDashboard;
+
