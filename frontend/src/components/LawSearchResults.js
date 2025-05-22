@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './LawSearchResults.css';
 
 const LawSearchResults = () => {
   const [query, setQuery] = useState('');
@@ -14,7 +15,7 @@ const LawSearchResults = () => {
   };
 
   useEffect(() => {
-     fetch(`/api/laws?query=${submittedQuery || ''}&filter=${submittedFilter || ''}`)
+    fetch(`/api/laws?query=${submittedQuery || ''}&filter=${submittedFilter || ''}`)
       .then(res => res.json())
       .then(data => setLaws(data))
       .catch(err => console.error('Error fetching laws:', err));
@@ -27,21 +28,19 @@ const LawSearchResults = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Search US Cybersecurity Laws</h1>
+    <div className="law-search-results-container">
+      <h1 className="law-search-header">Search US Cybersecurity Laws</h1>
 
       {/* Search Bar + Filter */}
-      <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-2 mb-4">
+      <form onSubmit={handleSearch} className="law-search-bar">
         <input
           type="text"
           placeholder="Search by keyword..."
-          className="flex-1 border p-2 rounded"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
 
         <select
-          className="border p-2 rounded"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
         >
@@ -50,36 +49,32 @@ const LawSearchResults = () => {
           <option value="Data Privacy">Data Privacy</option>
           <option value="Cybercrime Consequences">Cybercrime Consequences</option>
         </select>
-	<button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
+        <button type="submit">
           Search
         </button>
       </form>
 
       {/* Results */}
-      <div className="space-y-4">
+      <div className="law-list">
         {laws.length === 0 ? (
-          <p>No laws found.</p>
+          <p className="no-results">No laws found.</p>
         ) : (
           laws.map((law) => (
-            <div key={law.id} className="border p-4 rounded shadow">
-              <h2 className="text-xl font-semibold">{law.title}</h2>
-              <p className="text-gray-700">{law.description}</p>
-              <p className="text-sm mt-2"><strong>Category:</strong> {law.category}</p>
-              <a href={law.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+            <div key={law.id} className="law-card">
+              <h4>{law.title}</h4>
+              <p>{law.description}</p>
+              <p><strong>Category:</strong> {law.category}</p>
+              <a href={law.url} target="_blank" rel="noopener noreferrer">
                 View Full Law
               </a>
-              <div className="mt-3">
+              <div style={{ marginTop: '0.75rem' }}>
                 <button
                   onClick={() => handleCopy(law.citation)}
-                  className="mt-1 px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700"
                 >
                   Copy MLA Citation
                 </button>
               </div>
-	    </div>
+            </div>
           ))
         )}
       </div>
