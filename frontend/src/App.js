@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import LoginRegister from './components/LoginRegister';
 import AdminDashboard from './components/AdminDashboard';
 import LawSearchResults from './components/LawSearchResults';
+import './App.css';
 
 function App() {
   const [user, setUser] = useState(null);
