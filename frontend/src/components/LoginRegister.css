@@ -1,0 +1,113 @@
+.cyber-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cyber-container {
+  background: rgba(20, 30, 48, 0.97);
+  border: 2px solid #00ffe7;
+  border-radius: 18px;
+  box-shadow: 0 0 32px #00ffe7, 0 0 8px #1a2980;
+  padding: 2.5rem 2rem 2rem 2rem;
+  width: 100%;
+  max-width: 370px;
+  position: relative;
+  z-index: 2;
+}
+
+.cyber-title {
+  color: #00ffe7;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.cyber-success {
+  color: #00ff99;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.cyber-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.cyber-input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.cyber-input {
+  background: #181f2b;
+  border: 1.5px solid #00ffe7;
+  color: #fff;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.2s;
+  outline: none;
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  box-shadow: 0 0 8px #00ffe733;
+}
+
+.cyber-input:focus {
+  border: 1.5px solid #00ff99;
+  box-shadow: 0 0 12px #00ff99aa;
+}
+
+.cyber-btn {
+  background: linear-gradient(90deg, #00ffe7 0%, #00ff99 100%);
+  color: #181f2b;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 0 12px #00ffe7aa;
+  transition: background 0.2s, color 0.2s;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 1px;
+}
+
+.cyber-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.cyber-btn:hover:not(:disabled) {
+  background: linear-gradient(90deg, #00ff99 0%, #00ffe7 100%);
+  color: #0f2027;
+}
+
+.cyber-switch {
+  text-align: center;
+  margin-top: 1rem;
+  color: #b2fefa;
+  font-size: 0.98rem;
+}
+
+.cyber-link {
+  background: none;
+  border: none;
+  color: #00ffe7;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  margin: 0;
+  transition: color 0.2s;
+}
+
+.cyber-link:hover {
+  color: #00ff99;
+}
