@@ -1,0 +1,162 @@
+/* Cyberpunk background */
+.cyber-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card container */
+.cyber-container {
+  background: rgba(20, 30, 48, 0.97);
+  border: 2px solid #00ffe7;
+  border-radius: 18px;
+  box-shadow: 0 0 32px #00ffe7, 0 0 8px #1a2980;
+  padding: 2.5rem 2rem 2rem 2rem;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Title */
+.cyber-title {
+  color: #00ffe7;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+}
+
+/* Section headers */
+.cyber-section-title {
+  color: #00ffe7;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+/* Inputs */
+.cyber-input {
+  background: #181f2b;
+  border: 1.5px solid #00ffe7;
+  color: #fff;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.2s;
+  outline: none;
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  box-shadow: 0 0 8px #00ffe733;
+  margin-bottom: 0.8rem;
+}
+
+.cyber-input:focus {
+  border: 1.5px solid #00ff99;
+  box-shadow: 0 0 12px #00ff99aa;
+}
+
+/* Buttons */
+.cyber-btn {
+  background: linear-gradient(90deg, #00ffe7 0%, #00ff99 100%);
+  color: #181f2b;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 0 12px #00ffe7aa;
+  transition: background 0.2s, color 0.2s;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.cyber-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.cyber-btn:hover:not(:disabled) {
+  background: linear-gradient(90deg, #00ff99 0%, #00ffe7 100%);
+  color: #0f2027;
+}
+
+/* Red button for logout/delete */
+.cyber-btn-red {
+  background: linear-gradient(90deg, #ff416c 0%, #ff4b2b 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 12px #ff416c55;
+  transition: background 0.2s;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.cyber-btn-red:hover:not(:disabled) {
+  background: linear-gradient(90deg, #ff4b2b 0%, #ff416c 100%);
+}
+
+/* Results panels */
+.cyber-results-panel {
+  background: rgba(20, 30, 48, 0.97);
+  border: 2px solid #00ffe7;
+  border-radius: 16px;
+  box-shadow: 0 0 24px #00ffe7, 0 0 8px #1a2980;
+  padding: 1.5rem 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.cyber-law-title {
+  color: #00ff99;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+.cyber-law-link {
+  color: #00ffe7;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.cyber-law-link:hover {
+  color: #00ff99;
+}
+
+.cyber-citation-btn {
+  margin-top: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  border: none;
+  background: #00ffe7;
+  color: #181f2b;
+  font-size: 0.95rem;
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 8px #00ffe7aa;
+  transition: background 0.2s, color 0.2s;
+}
+
+.cyber-citation-btn:hover {
+  background: #00ff99;
+  color: #0f2027;
+}
+
+.cyber-loading {
+  color: #00ffe7;
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}

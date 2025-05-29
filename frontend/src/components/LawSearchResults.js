@@ -202,7 +202,6 @@ function LawSearchResults({ user, setUser, setLogoutMessage }) {
             )}
           </div>
 
-          {/* Right Column: Bookmarks */}
           <div className="law-panel" style={{ flex: 1 }}>
             <h3>
               Bookmarks ({bookmarks.length}/5)

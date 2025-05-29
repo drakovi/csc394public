@@ -76,6 +76,7 @@
   font-size: 1.1rem;
   border: none;
   cursor: pointer;
+  box-shadow: 0 0 12px #00ffe7aa;
   transition: background 0.2s, color 0.2s;
   font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
   letter-spacing: 1px;
