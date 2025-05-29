@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './LawSearchResults.css';
 
 function LawSearchResults({ user, setUser, setLogoutMessage }) {
   const [query, setQuery] = useState('');
@@ -81,151 +82,149 @@ function LawSearchResults({ user, setUser, setLogoutMessage }) {
     }
   };
 
-  return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">Search U.S. Cybersecurity Laws</h2>
-        <button
-          onClick={handleLogout}
-          className="bg-red-600 text-white px-4 py-2 rounded"
-        >
-          Logout
-        </button>
-      </div>
-
-      <div className="mb-6">
-        <input
-          type="text"
-          placeholder="Ask a legal question..."
-          className="w-full p-2 border rounded mb-2"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button
-          onClick={handleSearch}
-          disabled={loading}
-          className={`w-full py-2 rounded ${
-            loading ? 'bg-gray-400' : 'bg-blue-600 text-white'
-          }`}
-        >
-          {loading ? 'Searching...' : 'Search'}
-        </button>
-      </div>
-
-      {loading && (
-        <p className="text-center text-xl mb-4">Loading results...</p>
-      )}
-
-      <div className="flex flex-col lg:flex-row gap-6">
-        {/* Left Column: History */}
-        <div className="lg:w-1/4 bg-white p-4 rounded shadow">
-          <h3 className="text-lg font-semibold mb-3">Search History</h3>
-          {history.length === 0 ? (
-            <p className="text-sm text-gray-500">No search history yet.</p>
-          ) : (
-            <ul className="list-disc list-inside text-sm">
-              {history.map((item, i) => (
-                <li key={i}>{item.query}</li>
-              ))}
-            </ul>
-          )}
+    return (
+    <div className="law-bg">
+      <div className="law-container">
+        <div className="law-header">
+          <h2 className="law-title">Search U.S. Cybersecurity Laws</h2>
+          <button
+            onClick={handleLogout}
+            className="law-logout-btn"
+          >
+            Logout
+          </button>
         </div>
 
-        {/* Center Column: Results */}
-        <div className="lg:w-2/4">
-          {aiResults.length > 0 && (
-            <div className="mb-6 bg-white p-4 rounded shadow">
-              <h3 className="text-lg font-semibold mb-3">OpenAI Suggestions</h3>
-              {aiResults.map((law, index) => (
-                <div key={index} className="mb-5">
-                  <h4 className="text-xl font-bold mb-1">{law.title}</h4>
-                  <p>{law.description}</p>
-                  <p className="mt-2">
-                    <a
-                      href={law.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 underline"
-                    >
-                      Original document here
-                    </a>
-                  </p>
-                  <button
-                    onClick={() => handleCopy(law.citation)}
-                    className="mt-1 px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700"
-                  >
-                    Copy MLA Citation
-                  </button>
-                  <button
-                    onClick={() => handleBookmark(law.citation)}
-                    className="mt-1 ml-2 px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700"
-                  >
-                    Bookmark Citation
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {dbResults.length > 0 && (
-            <div className="bg-white p-4 rounded shadow">
-              <h3 className="text-lg font-semibold mb-3">
-                Database Matches
-              </h3>
-              {dbResults.map((law) => (
-                <div key={law.id} className="mb-5">
-                  <h4 className="text-xl font-bold mb-1">{law.title}</h4>
-                  <p>{law.description}</p>
-                  <p className="mt-2">
-                    <a
-                      href={law.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 underline"
-                    >
-                      Original document here
-                    </a>
-                  </p>
-                  <button
-                    onClick={() => handleCopy(law.citation)}
-                    className="mt-1 px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700"
-                  >
-                    Copy MLA Citation
-                  </button>
-                  <button
-                    onClick={() => handleBookmark(law.citation)}
-                    className="mt-1 ml-2 px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700"
-                  >
-                    Bookmark Citation
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
+        <div className="law-search-box">
+          <input
+            type="text"
+            placeholder="Ask a legal question..."
+            className="law-search-input"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button
+            onClick={handleSearch}
+            disabled={loading}
+            className="law-search-btn"
+          >
+            {loading ? 'Searching...' : 'Search'}
+          </button>
         </div>
 
-        {/* Right Column: Bookmarks */}
-        <div className="lg:w-1/4 bg-white p-4 rounded shadow">
-          <h3 className="text-lg font-semibold mb-3">
-            Bookmarks ({bookmarks.length}/5)
-          </h3>
-          {bookmarks.length === 0 ? (
-            <p className="text-sm text-gray-500">No bookmarks yet.</p>
-          ) : (
-            <ul className="list-disc list-inside text-sm">
-              {bookmarks.map((b, i) => (
-                <li key={i} className="mb-1">
-                  {b}{' '}
-                  <button
-                    onClick={() => handleRemoveBookmark(b)}
-                    className="text-red-600 ml-2 text-xs underline"
-                  >
-                    Remove
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
+        {loading && (
+          <p className="law-loading">Loading results...</p>
+        )}
+
+        <div className="law-columns">
+          {/* Left Column: History */}
+          <div className="law-panel" style={{ flex: 1 }}>
+            <h3>Search History</h3>
+            {history.length === 0 ? (
+              <p className="text-sm text-gray-500">No search history yet.</p>
+            ) : (
+              <ul>
+                {history.map((item, i) => (
+                  <li key={i}>{item.query}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* Center Column: Results */}
+          <div className="law-panel" style={{ flex: 2 }}>
+            {aiResults.length > 0 && (
+              <div className="mb-6">
+                <h3>OpenAI Suggestions</h3>
+                {aiResults.map((law, index) => (
+                  <div key={index} className="mb-5">
+                    <h4 className="law-result-title">{law.title}</h4>
+                    <p>{law.description}</p>
+                    <p className="mt-2">
+                      <a
+                        href={law.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="law-result-link"
+                      >
+                        Original document here
+                      </a>
+                    </p>
+                    <button
+                      onClick={() => handleCopy(law.citation)}
+                      className="law-btn law-btn-copy"
+                    >
+                      Copy MLA Citation
+                    </button>
+                    <button
+                      onClick={() => handleBookmark(law.citation)}
+                      className="law-btn law-btn-bookmark"
+                    >
+                      Bookmark Citation
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {dbResults.length > 0 && (
+              <div>
+                <h3>Database Matches</h3>
+                {dbResults.map((law) => (
+                  <div key={law.id} className="mb-5">
+                    <h4 className="law-result-title">{law.title}</h4>
+                    <p>{law.description}</p>
+                    <p className="mt-2">
+                      <a
+                        href={law.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="law-result-link"
+                      >
+                        Original document here
+                      </a>
+                    </p>
+                    <button
+                      onClick={() => handleCopy(law.citation)}
+                      className="law-btn law-btn-copy"
+                    >
+                      Copy MLA Citation
+                    </button>
+                    <button
+                      onClick={() => handleBookmark(law.citation)}
+                      className="law-btn law-btn-bookmark"
+                    >
+                      Bookmark Citation
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Right Column: Bookmarks */}
+          <div className="law-panel" style={{ flex: 1 }}>
+            <h3>
+              Bookmarks ({bookmarks.length}/5)
+            </h3>
+            {bookmarks.length === 0 ? (
+              <p className="text-sm text-gray-500">No bookmarks yet.</p>
+            ) : (
+              <ul>
+                {bookmarks.map((b, i) => (
+                  <li key={i} className="mb-1">
+                    {b}{' '}
+                    <button
+                      onClick={() => handleRemoveBookmark(b)}
+                      className="law-btn-remove"
+                    >
+                      Remove
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -233,4 +232,3 @@ function LawSearchResults({ user, setUser, setLogoutMessage }) {
 }
 
 export default LawSearchResults;
-
