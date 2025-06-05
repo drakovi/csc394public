@@ -117,11 +117,10 @@ function LawSearchResults({ user, setUser, setLogoutMessage }) {
         )}
 
         <div className="law-columns">
-          {/* Left Column: History */}
           <div className="law-panel" style={{ flex: 1 }}>
             <h3>Search History</h3>
             {history.length === 0 ? (
-              <p className="text-sm text-gray-500">No search history yet.</p>
+              <p>No search history yet.</p>
             ) : (
               <ul>
                 {history.map((item, i) => (
@@ -131,7 +130,6 @@ function LawSearchResults({ user, setUser, setLogoutMessage }) {
             )}
           </div>
 
-          {/* Center Column: Results */}
           <div className="law-panel" style={{ flex: 2 }}>
             {aiResults.length > 0 && (
               <div className="mb-6">
@@ -207,7 +205,7 @@ function LawSearchResults({ user, setUser, setLogoutMessage }) {
               Bookmarks ({bookmarks.length}/5)
             </h3>
             {bookmarks.length === 0 ? (
-              <p className="text-sm text-gray-500">No bookmarks yet.</p>
+              <p>No bookmarks yet.</p>
             ) : (
               <ul>
                 {bookmarks.map((b, i) => (
