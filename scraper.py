@@ -1,6 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 import mysql.connector
+import os
+import openai
+from dotenv import load_dotenv
+load_dotenv()
+
+client = openai.OpenAI(api_key="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")
 
 DB_CONFIG = {
     "host": "localhost",
@@ -15,6 +21,20 @@ LAW_URLS = [
     "https://www.law.cornell.edu/uscode/text/18/part-I/chapter-47"
 ]
 
+def generate_description(title, url):
+    prompt = f"Write a concise description for the U.S. law titled '{title}'. You can reference details from: {url}"
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=80,
+            temperature=0.7,
+        )
+        return response.choices[0].message.content.strip()
+    except Exception as e:
+        print(f"OpenAI error for {title}: {e}")
+        return ""
+    
 def fetch_laws(url):
     headers = {"User-Agent": "Mozilla/5.0"}
     resp = requests.get(url, headers=headers)
@@ -31,15 +51,7 @@ def fetch_laws(url):
         for a in sub_soup.select("ol.list-unstyled li.tocitem a"):
             title = a.get_text(strip=True)
             law_url = "https://www.law.cornell.edu" + a['href']
-            desc = ""
-            try:
-                law_resp = requests.get(law_url, headers=headers)
-                law_soup = BeautifulSoup(law_resp.text, "html.parser")
-                desc_tag = law_soup.find("meta", {"name": "description"})
-                if desc_tag:
-                    desc = desc_tag.get("content", "")
-            except Exception:
-                pass
+            desc = generate_description(title, law_url)
             laws.append({
                 "title": title,
                 "category": "Compliance",
@@ -68,5 +80,15 @@ if __name__ == "__main__":
         print(f"Fetching from {url}")
         all_laws.extend(fetch_laws(url))
     print(f"Fetched {len(all_laws)} laws.")
-    insert_laws(all_laws)
-    print("Inserted into database.")
+
+    # Print as SQL value tuples for manual DB insertion
+    values = []
+    for idx, law in enumerate(all_laws, start=1):
+        # Escape single quotes for SQL
+        title = law["title"].replace("'", "''")
+        category = law["category"].replace("'", "''")
+        description = law["description"].replace("'", "''")
+        citation = law["citation"].replace("'", "''")
+        url = law["url"].replace("'", "''")
+        values.append(f"({idx},'{title}','{category}','{description}','{citation}','{url}')")
+    print(",".join(values))
