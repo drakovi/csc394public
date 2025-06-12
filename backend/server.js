@@ -82,11 +82,28 @@ Respond only in JSON array format. Each law should be a JSON object with keys: t
     const conditions = keywords.map(k => '(title LIKE ? OR description LIKE ?)').join(' OR ');
     const values = keywords.flatMap(k => [`%${k}%`, `%${k}%`]);
 
-    const sql = `SELECT * FROM us_cybersecurity_laws WHERE ${conditions}`;
-    db.query(sql, values, (err, dbResults) => {
-      if (err) return res.status(500).json({ message: 'SQL error' });
-      res.json({ aiResults, dbResults });
-    });
+    const sql = `
+  SELECT * FROM us_cybersecurity_laws 
+  WHERE ${conditions} 
+  LIMIT 10
+`;
+db.query(sql, values, (err, dbResults) => {
+  if (err) return res.status(500).json({ message: 'SQL error' });
+
+  // Rank and limit top 3 by keyword hits
+  const scored = dbResults.map(row => {
+    const text = `${row.title} ${row.description}`.toLowerCase();
+    const score = keywords.reduce((acc, word) => acc + (text.includes(word) ? 1 : 0), 0);
+    return { ...row, score };
+  });
+
+  const topDbResults = scored
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
+
+  res.json({ aiResults: aiResults.slice(0, 3), dbResults: topDbResults });
+});
+
   } catch (err) {
     console.error('Combined search error:', err);
     res.status(500).json({ message: 'Failed to fetch OpenAI results' });
