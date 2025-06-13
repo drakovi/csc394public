@@ -16,7 +16,7 @@ Users can view their previous searches, as a history feature.
 # Admin Features  
 Admin Dashboard: Secure login allows admins to manage the platform.
 
-Admins will be able to add, edit, or delete laws, ensuring the database is up-to-date.
+Admins will be able to search for laws.
 
 Admins can delete and add users.
 
